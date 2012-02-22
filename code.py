@@ -19,7 +19,13 @@ def find_similarity_2norm(x,y,rates):
 	return numpy.linalg.norm(tempmat, ord=2)
 
 def p_correlation(x,y,rates):
-	return pearsonr(rates[x], rates[y])[0]
+	a=[]
+	b=[]
+	for i in range(len(papers)):
+		if rates[x][i]!=0 and rates[y][i]!=0:
+			a.append(rates[x][i])
+			b.append(rates[y][i])
+	return pearsonr(a, b)[0]
 
 def main():
 	for i in ratings:
@@ -40,8 +46,6 @@ def main():
 	for i in range(len(stu)):
 		for j in range(len(stu)):
 			similarity[i][j]=find_similarity_2norm(i,j,rates)
-	for i in range(len(stu)):
-		for j in range(len(stu)):
 			p_corr[i][j]=p_correlation(i,j,rates)
 	
 
